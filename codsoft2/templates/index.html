@@ -1,0 +1,159 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Ultra AI Spam Detector</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="left-panel">
+
+        <h1>AI Spam SMS Detector</h1>
+
+        <form action="/predict" method="POST">
+
+            <textarea
+                name="message"
+                placeholder="Enter SMS Message..."
+                required
+            ></textarea>
+
+            <button type="submit">
+                Analyze Message
+            </button>
+
+        </form>
+
+        {% if result %}
+
+        <div class="result-box">
+
+            <h2 style="color:{{ color }}">
+                {{ result }}
+            </h2>
+
+            <p>
+                Spam Probability:
+                {{ spam_probability }}%
+            </p>
+
+            <p>
+                Safe Probability:
+                {{ safe_probability }}%
+            </p>
+
+            <p>
+                AI Confidence:
+                {{ ai_score }}%
+            </p>
+
+            <div class="bar">
+
+                <div class="progress"
+                     style="width:{{ spam_probability }}%">
+                </div>
+
+            </div>
+
+            <h3>Detected Keywords</h3>
+
+            <div class="keywords">
+
+                {% for word in detected_keywords %}
+
+                    <span>{{ word }}</span>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <div class="right-panel">
+
+        <div class="dashboard">
+
+            <h2>Analytics Dashboard</h2>
+
+            <div class="stats">
+
+                <div class="box">
+
+                    <h3>Total</h3>
+
+                    <p>{{ total_messages }}</p>
+
+                </div>
+
+                <div class="box">
+
+                    <h3>Spam</h3>
+
+                    <p>{{ spam_count }}</p>
+
+                </div>
+
+                <div class="box">
+
+                    <h3>Safe</h3>
+
+                    <p>{{ safe_count }}</p>
+
+                </div>
+
+            </div>
+
+            <h2>History</h2>
+
+            <div class="history">
+
+                {% for item in history %}
+
+                <div class="history-item">
+
+                    <p>{{ item.message }}</p>
+
+                    <span>
+                        {{ item.result }}
+                    </span>
+
+                    <small>
+                        {{ item.time }}
+                    </small>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

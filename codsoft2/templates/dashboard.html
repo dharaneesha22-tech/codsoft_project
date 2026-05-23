@@ -1,0 +1,117 @@
+<!-- templates/dashboard.html -->
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="main">
+
+    <div class="left">
+
+        <h1>AI Spam SMS Detection</h1>
+
+        <h2>Welcome {{ username }}</h2>
+
+        <form action="/predict" method="POST">
+
+            <textarea
+                name="message"
+                placeholder="Enter SMS Message..."
+                required
+            ></textarea>
+
+            <button type="submit">
+
+                Analyze Message
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="right">
+
+        <div class="stats">
+
+            <div class="card">
+
+                <h3>Total</h3>
+
+                <p>{{ total }}</p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Spam</h3>
+
+                <p>{{ spam }}</p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Safe</h3>
+
+                <p>{{ safe }}</p>
+
+            </div>
+
+        </div>
+
+        <div class="history">
+
+            <h2>Prediction History</h2>
+
+            {% for item in history %}
+
+            <div class="history-box">
+
+                <p>{{ item[2] }}</p>
+
+                <span>{{ item[3] }}</span>
+
+                <small>
+                    {{ item[4] }}%
+                </small>
+
+                <small>
+                    {{ item[5] }}
+                </small>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <a href="/logout">
+
+            <button class="logout">
+
+                Logout
+
+            </button>
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
