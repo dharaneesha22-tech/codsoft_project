@@ -1,0 +1,154 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Ultra AI Handwriting Generator</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="glass">
+
+        <h1>Ultra AI Handwriting Generator</h1>
+
+        <form action="/generate" method="POST">
+
+            <textarea
+                name="text"
+                placeholder="Enter your text..."
+                required
+            ></textarea>
+
+            <div class="grid">
+
+                <div>
+
+                    <label>Background</label>
+
+                    <input type="color"
+                           name="bgcolor"
+                           value="#ffffff">
+
+                </div>
+
+                <div>
+
+                    <label>Text Color</label>
+
+                    <input type="color"
+                           name="textcolor"
+                           value="#000000">
+
+                </div>
+
+                <div>
+
+                    <label>Handwriting Style</label>
+
+                    <select name="style">
+
+                        <option value="normal">
+                            Normal
+                        </option>
+
+                        <option value="bold">
+                            Bold Writing
+                        </option>
+
+                        <option value="thin">
+                            Thin Writing
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label>Paper Style</label>
+
+                    <select name="paper">
+
+                        <option value="plain">
+                            Plain
+                        </option>
+
+                        <option value="lined">
+                            Lined Paper
+                        </option>
+
+                        <option value="grid">
+                            Grid Paper
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="checkboxes">
+
+                <label>
+                    <input type="checkbox"
+                           name="shadow">
+                    Shadow Effect
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                           name="noise">
+                    Noise Texture
+                </label>
+
+            </div>
+
+            <button type="submit">
+                Generate AI Handwriting
+            </button>
+
+        </form>
+
+        {% if generated_image %}
+
+        <div class="output">
+
+            <h2>Generated Output</h2>
+
+            <img src="{{ generated_image }}">
+
+            <a href="{{ generated_image }}" download>
+
+                <button class="download">
+                    Download Image
+                </button>
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
